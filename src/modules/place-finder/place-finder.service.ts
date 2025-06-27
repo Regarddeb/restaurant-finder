@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import configuration from 'src/config/env.validation';
-import { buildUrl } from 'src/common/utils/urlBuilder';
+import { buildUrl } from '../../common/utils/urlBuilder';
 import { Places, FindPlaceParams } from './interfaces/places';
 
 const config = configuration();
