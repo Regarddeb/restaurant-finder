@@ -5,7 +5,7 @@ dotenvConfig()
 
 // validate env variables on load
 const configSchema = z.object({
-  APP_URL: z.string().url(),
+  APP_URL: z.string().url().optional(),
   APP_PORT: z.string().regex(/^\d+$/).transform(Number).default('3000'),
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
