@@ -2,7 +2,8 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import configuration from 'src/config/env.validation';
 import { buildUrl } from '../../common/utils/urlBuilder';
-import { Places, FindPlaceParams } from './interfaces/places';
+import { Places } from './interfaces/places';
+import { FindPlaceDto } from './dto/find-place.dto';
 
 const config = configuration();
 
@@ -11,7 +12,7 @@ export class PlaceFinderService {
   private FOURSQUARE_API_KEY = config.foursquare.apiKey;
   private FOUR_SQUARE_URL = config.foursquare.baseUrl;
 
-  async execute(dto: FindPlaceParams) {
+  async execute(dto: FindPlaceDto) {
     const queryParams = instanceToPlain(dto);
     const apiURL = buildUrl(this.FOUR_SQUARE_URL, queryParams.parameters);
 
@@ -35,7 +36,6 @@ export class PlaceFinderService {
       const json = await response.json();
       return this.formatResponse(json.results);
     } catch (error) {
-      console.error('Error calling Foursquare API:', error);
       throw new HttpException(
         `Failed to fetch restaurant data: ${error.message}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
