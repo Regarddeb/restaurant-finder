@@ -18,8 +18,8 @@ export class RestaurantService {
       throw new UnauthorizedException('Message is invalid or not recognized');
     }
 
-    let query = await this.promptGeneratorService.execute(dto.message);
-    let places = await this.placeFinderService.execute(query);
+    let queryParams = await this.promptGeneratorService.execute(dto.message);
+    let places = await this.placeFinderService.execute(queryParams);
     return places;
   }
 }
