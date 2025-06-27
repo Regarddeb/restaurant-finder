@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import configuration from 'src/config/env.validation';
-import googleApi from 'src/common/utils/googleApi';
+import googleApi from '../../common/utils/googleApi';
 
 const config = configuration();
 
