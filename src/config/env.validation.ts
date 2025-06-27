@@ -17,12 +17,11 @@ const configSchema = z.object({
   FSS_BASE_URL: z.string().url(),
 
   // llm used for development(ollama)
-  LLM_BASE_URL: z.string().url().optional().or(z.literal('')),
-  LLM_API_KEY: z.string().optional().or(z.literal('')),
+  OLLAMA_BASE_URL: z.string().url().optional().or(z.literal('')),
 
   // llm used in production
-  LLM_PROD_URL: z.string().url().optional().or(z.literal('')),
-  LLM_PROD_API_KEY: z.string().optional().or(z.literal('')),
+  GOOGLE_API_URL: z.string().url().optional().or(z.literal('')),
+  GOOGLE_API_KEY: z.string().optional().or(z.literal('')),
 });
 
 const config = configSchema.parse(process.env);
@@ -40,12 +39,12 @@ const configuration = () => ({
     apiKey: config.FSS_API_KEY,
     baseUrl: config.FSS_BASE_URL,
   },
-  llm: {
-    baseUrl: config.LLM_BASE_URL,
+  ollama: {
+    baseUrl: config.OLLAMA_BASE_URL,
   },
-  llmProd: {
-    prodUrl: config.LLM_PROD_URL,
-    prodApiKey: config.LLM_PROD_API_KEY,
+  googleAI: {
+    googleApiUrl: config.GOOGLE_API_URL,
+    googleApiKey: config.GOOGLE_API_KEY,
   },
 });
 
