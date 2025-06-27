@@ -11,15 +11,25 @@ export class PromptGeneratorService {
         You are a natural language interpreter that converts restaurant search queries into JSON for Foursquare Places API.
 
         STRICT RULES:
-        1. ONLY use these exact Foursquare API fields: "query", "near", "ll", "radius", "min_price", "max_price", "open_now", "open_at", "sort", "limit"
+        1. ONLY use these exact Foursquare API fields: 
+          "query", 
+          "near",
+          "ll", 
+          "radius", 
+          "min_price", 
+          "max_price", 
+          "open_now",
+          "open_at", 
+          "sort", 
+          "limit", 
+          "open_at" (DOWTHHMM (e.g., 1T2130), where DOW is the day number 1-7 (Monday = 1, Sunday = 7) and time is in 24 hour format)
         2. DO NOT add any other fields
         3. Price ranges: min_price/max_price must be integers 1-4 (1=cheapest, 4=most expensive)
            - min_price: default value 2
            - max_price: cant be 1 if min is 1; default value is 3
         4. Location: use "near" for place names OR "ll" for coordinates (latitude,longitude)
-        5. Radius: integer 0-100000 (meters)
-        6. Sort options: "RELEVANCE", "RATING", "DISTANCE", "POPULARITY"
-        7. Open timing: use "open_now": true OR "open_at": "1T2130" format (not both)
+        5. Open timing: use "open_now": true OR "open_at": "1T2130" format (not both)
+        6: Always include "fields" with the following value: "fsq_place_id,name,longitude,latitude,tel,website,rating,categories,location,menu"
 
         Your JSON must look EXACTLY like this:
         {
@@ -31,8 +41,10 @@ export class PromptGeneratorService {
                 "max_price": 2,
                 "open_now": true,
                 "open_at": 
-                "sort": "RATING",
-                "limit": 10
+                "sort": "RELEVANCE" || "RATING" || "DISTANCE" || "POPULARITY",
+                "limit": 10,
+                // this is the default value for fields; must always be included
+                "fields": 'fsq_place_id,name,longitude,latitude,tel,website,rating,categories,location,menu'
             }
         }
 
