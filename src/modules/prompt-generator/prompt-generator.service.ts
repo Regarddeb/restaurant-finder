@@ -29,7 +29,6 @@ export class PromptGeneratorService {
            - max_price: cant be 1 if min is 1; default value is 3
         4. Location: use "near" for place names OR "ll" for coordinates (latitude,longitude)
         5. Open timing: use "open_now": true OR "open_at": "1T2130" format (not both)
-        6: Always include "fields" with the following value: "fsq_place_id,name,longitude,latitude,tel,website,rating,categories,location,menu"
 
         Your JSON must look EXACTLY like this:
         {
@@ -43,8 +42,6 @@ export class PromptGeneratorService {
                 "open_at": 
                 "sort": "RELEVANCE" || "RATING" || "DISTANCE" || "POPULARITY",
                 "limit": 10,
-                // this is the default value for fields; must always be included
-                "fields": 'fsq_place_id,name,longitude,latitude,tel,website,rating,categories,location,menu'
             }
         }
 
