@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import configuration from 'src/config/env.validation';
 import googleApi from '../../common/utils/googleApi';
-
-const config = configuration();
+import { FindPlaceDto } from '../place-finder/dto/find-place.dto';
 
 @Injectable()
 export class PromptGeneratorService {
@@ -62,10 +60,11 @@ export class PromptGeneratorService {
   async generateStructuredQuery(prompt: string) {
     const response = await googleApi(prompt);
     const generatedText = response.data.candidates[0].content.parts[0].text;
-    return this.extractJson(generatedText);
+    const queryParams = this.extractJson(generatedText);
+    return queryParams;
   }
 
-  private extractJson(raw: string): any {
+  private extractJson(raw: string): FindPlaceDto {
     // First, try to extract JSON from markdown code blocks
     const codeBlockMatch = raw.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
     if (codeBlockMatch) {
