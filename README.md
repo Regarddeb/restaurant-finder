@@ -27,6 +27,7 @@ $ npm install
 - Create a .env file in the root folder of the project. Copy the contents of .env.example into the new .env file.
 - Assign the Google API key in the `GOOGLE_API_KEY` variable
 - Assign the Four Square Space API key in the `FSS_API_KEY` variable
+- Asssign a value to the `AUTH_CODE` variable
 
 ## Compile and run the project
 
